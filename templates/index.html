@@ -43,12 +43,22 @@
             color: #ccc;
         }
 
+        .topic-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
         .topic-card {
             background: #1c1c1c;
             border: 1px solid #333;
             border-radius: 8px;
             padding: 20px;
             margin-bottom: 15px;
+        }
+
+        .topic-card:hover {
+            border-color: #777;
         }
 
         .topic-card h3 {
@@ -98,35 +108,36 @@
 
             {% for topic in topics %}
 
-                <div class="topic-card">
+                <a class="topic-link"
+                   href="{{ url_for('topic_detail', slug=topic.slug) }}">
 
-                    <h3>{{ topic.title }}</h3>
+                    <div class="topic-card">
 
-                    <p>
-                        {{ topic.summary }}
-                    </p>
+                        <h3>{{ topic.title }}</h3>
 
-                    {% if topic.category %}
-                        <small>
-                            Category: {{ topic.category }}
-                        </small>
-                    {% endif %}
+                        <p>{{ topic.summary }}</p>
 
-                </div>
+                        {% if topic.category %}
+                            <small>
+                                Category: {{ topic.category }}
+                            </small>
+                        {% endif %}
+
+                    </div>
+
+                </a>
 
             {% endfor %}
 
         {% else %}
 
             <div class="topic-card">
-
                 <h3>No topics yet</h3>
 
                 <p>
                     The Controversion database is ready for its
                     first controversy.
                 </p>
-
             </div>
 
         {% endif %}
