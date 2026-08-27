@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ topic.title }} | Controversion</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #111;
+            color: #eee;
+        }
+
+        header {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+
+        header a {
+            color: #eee;
+            text-decoration: none;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .topic-header {
+            margin-bottom: 40px;
+        }
+
+        .topic-header h1 {
+            margin-bottom: 10px;
+        }
+
+        .summary {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        .meta {
+            color: #999;
+            margin-top: 15px;
+        }
+
+        .claim-card {
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .claim-card h3 {
+            margin-top: 0;
+        }
+
+        .claim-description {
+            color: #ccc;
+            line-height: 1.5;
+        }
+
+        .confidence {
+            margin-top: 15px;
+            color: #aaa;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #bbb;
+            text-decoration: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #888;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <a href="/">
+        <strong>Controversion</strong>
+    </a>
+</header>
+
+<main>
+
+    <a class="back-link" href="/">
+        ← Back to Topics
+    </a>
+
+    <section class="topic-header">
+
+        <h1>{{ topic.title }}</h1>
+
+        <p class="summary">
+            {{ topic.summary }}
+        </p>
+
+        <div class="meta">
+
+            {% if topic.category %}
+                Category: {{ topic.category }}
+            {% endif %}
+
+            {% if topic.status %}
+                | Status: {{ topic.status }}
+            {% endif %}
+
+        </div>
+
+    </section>
+
+    <section>
+
+        <h2>Claims</h2>
+
+        {% if topic.claims %}
+
+            {% for claim in topic.claims %}
+
+                <div class="claim-card">
+
+                    <h3>
+                        {{ claim.claim_text }}
+                    </h3>
+
+                    {% if claim.description %}
+                        <p class="claim-description">
+                            {{ claim.description }}
+                        </p>
+                    {% endif %}
+
+                    {% if claim.confidence_level %}
+                        <div class="confidence">
+                            Confidence level:
+                            {{ claim.confidence_level }} / 6
+                        </div>
+                    {% endif %}
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="claim-card">
+                <p>No claims have been added to this topic yet.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+
+</main>
+
+<footer>
+    Controversion
+</footer>
+
+</body>
+</html>
